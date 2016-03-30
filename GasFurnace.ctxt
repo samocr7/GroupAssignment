@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=
+comment0.target=GasFurnace()
+comment1.params=furnaceCap
+comment1.target=void\ setFurnaceCap(int)
+numComments=2

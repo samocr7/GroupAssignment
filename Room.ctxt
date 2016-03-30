@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=temp
+comment0.target=void\ setTempSetting(double)
+comment1.params=size
+comment1.target=void\ setRoomSize(int)
+numComments=2

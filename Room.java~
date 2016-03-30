@@ -1,0 +1,13 @@
+public class Room
+{
+    private int temp=22;
+    private int size=2000;//feet
+    public void setTempSetting(int temp){
+        //sets the temperature setting to the one passed in
+        this.temp=temp;
+    }
+    public void setRoomSize(int size){
+    //sets the room size to the one passed in
+    this.size=size;
+    }
+}

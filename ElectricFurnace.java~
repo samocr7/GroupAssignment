@@ -1,0 +1,11 @@
+public class ElectricFurnace extends Furnace
+{
+    private final double EFFICIENCY=92/100;
+    public ElectricFurnace(){
+        super();
+    }
+    
+    public void setFurnaceCap(int furnaceCap){
+    this.furnaceCap=furnaceCap;
+    }
+}
