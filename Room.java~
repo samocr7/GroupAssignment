@@ -1,8 +1,8 @@
 public class Room
 {
-    private int temp=22;
+    //private double temp=22.00;
     private int size=2000;//feet
-    public void setTempSetting(int temp){
+    public void setTempSetting(double temp){
         //sets the temperature setting to the one passed in
         this.temp=temp;
     }

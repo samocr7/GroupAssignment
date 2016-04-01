@@ -1,0 +1,6 @@
+public class NumberFException extends NumberFormatException
+{
+    public NumberFException(){
+    super("Invalid input. Please enter a number.");
+    }
+}
