@@ -1,2 +1,4 @@
 #BlueJ class context
-numComments=0
+comment0.params=dateBuilt\ furnaceCap\ efficiency
+comment0.target=Furnace(int,\ double,\ double)
+numComments=1

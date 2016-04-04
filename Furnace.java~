@@ -7,6 +7,12 @@
  */
 public abstract class Furnace
 {
-    private String dateBuilt;
-    private int furnaceCap=50000;
+    protected int dateBuilt;
+    protected double furnaceCap;
+    
+    public Furnace(int dateBuilt, double furnaceCap){
+    this.dateBuilt=dateBuilt;
+    this.furnaceCap=furnaceCap;
+    
+    }
 }

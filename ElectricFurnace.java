@@ -1,12 +1,10 @@
 public class ElectricFurnace extends Furnace
 {
-    private final double EFFICIENCY=92/100;
-    public ElectricFurnace(){
-        super();
+    //private double efficiency;
+    //private double furnaceCap;
+    public ElectricFurnace(int dateBuilt, double furnaceCap, double efficiency){
+        super(dateBuilt,furnaceCap, efficiency);
+        
     }
 
-    public void setFurnaceCap(int furnaceCap){
-        //sets the furnaceCap to the one passed in
-        this.furnaceCap=furnaceCap;
-    }
 }

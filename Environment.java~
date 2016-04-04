@@ -1,8 +1,4 @@
 public class Environment
 {
-    private int temp=10;
-    public void setTempSetting(int temp){
-       //sets the environment temperature to the one passed in
-        this.temp=temp;
-    }
+    private double temp;
 }

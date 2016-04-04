@@ -5,10 +5,12 @@ public class Window extends JFrame
 {
     //creates objects of the JPanel, JLabel and JTextField classes.
     JPanel panel=new JPanel();
-    JLabel roomTemp, outsideTemp, desireTemp, furnaceType, furnaceCap, furnaceEff, roomSize, overheat, freq, time;
-    JTextField roomText, outsideText, desireText, furnaceText, furnaceCapText, effText, sizeText, overheatText, freqText, timeText;
+    JLabel roomTemp, outsideTemp, desireTemp, furnaceType, furnaceCap, furnaceEff, roomSize, overheat, freq, time, dateBuilt;
+    JTextField roomText, outsideText, desireText, furnaceText, furnaceCapText, effText, sizeText, overheatText, freqText, timeText, dateBuiltText;
+    double roomTempDouble,outsideTempDouble, insideDesiredRoomTempDouble,furnaceCapDouble,furnaceEffDouble,roomSizeDouble,furnaceOverheatTempDouble,freqSecDouble;
+    int lengthInt;
     public Window(){
-        setSize(800,200); //300px by 300px window
+        setSize(1000,300); //
         setTitle("Monthly Sales Tax");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(500,500); 
@@ -18,7 +20,7 @@ public class Window extends JFrame
     }
 
     public void createPanel(){
-        panel.setLayout(new GridLayout(7,7)); //7 rows, 2 column grid
+        panel.setLayout(new GridLayout(8,7)); //7 rows, 2 column grid
 
         JButton simulate=new JButton("Simulate"); //simulate button
         JButton exit = new JButton("Exit"); //exit button
@@ -33,6 +35,7 @@ public class Window extends JFrame
         overheat = new JLabel("Overheat amount:",JLabel.RIGHT); //overheat label
         freq = new JLabel("Output intervals:",JLabel.RIGHT);    //frequency label
         time = new JLabel("Simulation duration:",JLabel.RIGHT); //simulation time label
+        dateBuilt= new JLabel("Year the furnace was built:",JLabel.RIGHT); //datebuilt label
 
         roomText= new JTextField("22.00",8);  //roomTemperature text field
         outsideText = new JTextField("10.00",8);   //outsideTemperature text field
@@ -44,7 +47,8 @@ public class Window extends JFrame
         overheatText= new JTextField("2.0",7); //overheat text field
         freqText= new JTextField("5",7);    //frequency text field
         timeText= new JTextField("7200",7); //time text field
-        
+        dateBuiltText= new JTextField("XXXX",7); //dateBuilt text field
+
         //adds all the labels, text fields and buttons to the panel
         panel.add(roomTemp);
         panel.add(roomText);
@@ -76,139 +80,195 @@ public class Window extends JFrame
         panel.add(time);
         panel.add(timeText);
 
+        panel.add(dateBuilt);
+        panel.add(dateBuiltText);
+
         panel.add(simulate);
         panel.add(exit);
-        
+
         //event listener for buttons
         simulate.addActionListener(new CalculateButtonListener()); //simulate button
         exit.addActionListener(new ExitButtonListener());   //exit button
     }
+
     public void setFields(){
-    
-            String roomTempStr = roomText.getText(); // this is the current inside temperature
-            try
+
+        String roomTempStr = roomText.getText(); // this is the current inside temperature
+        try
+        {
+            roomTempDouble = Double.parseDouble(roomTempStr);    
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            roomText.setText("Error! Invalid Input! Please enter a number.");
+        }
+
+        String outsideTempStr = outsideText.getText(); // this is the current outside temperature
+        try
+        {
+             outsideTempDouble = Double.parseDouble(outsideTempStr);      
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            outsideText.setText("Error! Invalid Input! Please enter a number.");
+        }
+
+        String insideDesiredRoomTempStr = desireText.getText(); // this is the desired room temperature
+        try
+        {
+             insideDesiredRoomTempDouble  = Double.parseDouble(insideDesiredRoomTempStr);      
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            desireText.setText("Error! Invalid Input! Please enter a number.");
+        }
+
+        String furnaceTypeStr = furnaceText.getText(); // furnace type, 'Gas' or "Electric'
+        try
+        {
+            if ((furnaceTypeStr.equalsIgnoreCase("Gas")) || (furnaceTypeStr.equalsIgnoreCase("Electric")))
             {
-                double roomTempDouble = Double.parseDouble(roomTempStr);   	
+                // do the thing if its correct here
             }
-            catch(NumberFormatException ex)
+            else
             {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
+                // throw the error if the input is invalid
+                throw new IllegalArgumentException("Error! Invalid Input! Enter 'Gas' or 'Electric'");
             }
-            
-            String outsideTempStr = outsideText.getText(); // this is the current outside temperature
-            try
+        }
+        catch(IllegalArgumentException ex) // catch the exception that is thrown if user enters invalid input
+        {
+            furnaceText.setText(ex.getMessage());
+            //System.out.println("Error! Invalid Input! Enter 'Gas' or 'Electric'");
+        }
+
+        String furnaceCapStr = furnaceCapText.getText(); // capacity of the furnace, in BTUs/hr
+        try
+        {
+             furnaceCapDouble = Double.parseDouble(furnaceCapStr);    
+            if(furnaceCapDouble<=0.0){
+                throw new IllegalArgumentException("Error! Invalid Input! Please enter a number greater than 0.");
+            }
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            furnaceCapText.setText("Error! Invalid Input! Please enter a number.");
+        } 
+        catch(IllegalArgumentException ex){
+            furnaceCapText.setText(ex.getMessage());
+        }
+
+        String furnaceEffStr = effText.getText(); // efficiency of the furnace 0.0 - 1.0
+        try
+        {
+             furnaceEffDouble = Double.parseDouble(furnaceEffStr);
+            if ((furnaceEffDouble >= 0.0) && (furnaceEffDouble <= 1.0))
             {
-                double outsideTempDouble = Double.parseDouble(outsideTempStr);   	
+                // do the thing thats the thing that this thing should do when the input is correct
             }
-            catch(NumberFormatException ex)
+            else // throw the error because the range entered isnt correct
             {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
+                throw new IllegalArgumentException("Error! Invalid Input! Please enter a number between 0.0 and 1.0");
             }
-            
-            String insideDesiredRoomTempStr = desireText.getText(); // this is the desired room temperature
-            try
-            {
-                double insideDesiredRoomTempDouble = Double.parseDouble(insideDesiredRoomTempStr);   	
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            effText.setText("Error! Invalid Input! Please enter a number.");
+        }
+        catch (IllegalArgumentException ex)//when the efficiency is not between 0 and 1
+        {
+            effText.setText(ex.getMessage());
+        }
+
+        String roomSizeStr = sizeText.getText(); // size of the room to be heated
+        try
+        {
+            roomSizeDouble = Double.parseDouble(roomSizeStr);
+            if(roomSizeDouble<=0.0){
+                throw new IllegalArgumentException("Error! Invalid Input! Please enter a number greater than 0.");
             }
-            catch(NumberFormatException ex)
-            {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            sizeText.setText(("Error! Invalid Input! Please enter a number."));
+        }
+        catch(IllegalArgumentException ex){
+            sizeText.setText(ex.getMessage());
+        }
+
+        String furnaceOverheatTempStr=overheatText.getText();
+        try
+        {
+             furnaceOverheatTempDouble = Double.parseDouble(furnaceOverheatTempStr);   
+            if(furnaceOverheatTempDouble<=0.0){
+                throw new IllegalArgumentException("Error! Invalid Input! Please enter a number greater than 0.");
             }
-            
-            String furnaceTypeStr = furnaceText.getText(); // furnace type, 'Gas' or "Electric'
-            try
-            {
-                if ((furnaceTypeStr.equals("Gas")) || (furnaceTypeStr.equals("Electric")))
-                {
-                    // do the thing if its correct here
-                }
-                else
-                {
-                    // throw the error if the input is invalid
-                    throw new IllegalArgumentException("Error! Invalid Input! Enter 'Gas' or 'Electric'");
-                }
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            overheatText.setText(("Error! Invalid Input! Please enter a number."));
+        }
+        catch(IllegalArgumentException ex){
+            overheatText.setText(ex.getMessage());
+        }
+
+        String freqSecStr=freqText.getText();
+        try
+        {
+             freqSecDouble = Double.parseDouble(freqSecStr);  
+            if(freqSecDouble <=0.0){
+                throw new IllegalArgumentException("Error! Invalid Input! Please enter a number greater than 0.");
             }
-            catch(IllegalArgumentException ex) // catch the exception that is thrown if user enters invalid input
-            {
-                System.out.println(ex.getMessage());
-                //System.out.println("Error! Invalid Input! Enter 'Gas' or 'Electric'");
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            freqText.setText(("Error! Invalid Input! Please enter a number."));
+        }
+        catch(IllegalArgumentException ex){
+            freqText.setText(ex.getMessage());
+
+        }
+
+        String LengthStr=timeText.getText();
+
+        try
+        {
+            lengthInt = Integer.parseInt(LengthStr);    
+            if(lengthInt<=0){
+                throw new IllegalArgumentException("Error! Invalid Input! Please enter a number greater than 0.");
             }
-            
-            
-            String furnaceCapStr = furnaceCapText.getText(); // capacity of the furnace, in BTUs/hr
-            try
-            {
-                double furnaceCapDouble = Double.parseDouble(furnaceCapStr);   	
+        }
+        catch(NumberFormatException ex)
+        {
+            //System.out.println(ex.getMessage());
+            timeText.setText(("Error! Invalid Input! Please enter a number."));
+        }
+        catch(IllegalArgumentException ex){
+            timeText.setText(ex.getMessage());
+        }
+
+        String dateBuiltStr=dateBuiltText.getText();
+
+        try{
+            int year = Integer.parseInt(dateBuiltStr);
+            if(year<=0){
+                throw new IllegalArgumentException("Error! Invalid Input! Please enter a number greater than .");
             }
-            catch(NumberFormatException ex)
-            {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
-            }
-            
-            String furnaceEffStr = effText.getText(); // efficiency of the furnace 0.0 - 1.0
-            try
-            {
-                double furnaceEffDouble = Double.parseDouble(furnaceEffStr);
-                if ((furnaceEffDouble >= 0.0) && (furnaceEffDouble <= 1.0))
-                {
-                    // do the thing thats the thing that this thing should do when the input is correct
-                }
-                else // throw the error because the range entered isnt correct
-                {
-                    throw new IllegalArgumentException("Error! Invalid Input! Please enter a number between 0.0 and 1.0");
-                }
-            }
-            catch(NumberFormatException ex)
-            {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
-            }
-            catch (IllegalArgumentException ex)
-            {
-                System.out.println(ex.getMessage());
-            }
-            
-            String roomSizeStr = sizeText.getText(); // size of the room to be heated
-            try
-            {
-                double roomSizeDouble = Double.parseDouble(roomSizeStr);   	
-            }
-            catch(NumberFormatException ex)
-            {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
-            }
-            
-            String furnaceOverheatTempStr=overheatText.getText();
-            try
-            {
-                double furnaceOverheatTempDouble = Double.parseDouble(furnaceOverheatTempStr);   	
-            }
-            catch(NumberFormatException ex)
-            {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
-            }
-            
-            String freqSecStr=freq.getText();
-            try
-            {
-                double freqSecDouble = Double.parseDouble(freqSecStr);   	
-            }
-            catch(NumberFormatException ex)
-            {
-                System.out.println(ex.getMessage());
-                System.out.println("Error! Invalid Input! Please enter a number.");
-            }
-            
-            
-            
-            String strTime=time.getText();
-    
+        }
+        catch(NumberFormatException ex){
+        dateBuiltText.setText(("Error! Invalid Input! Please enter a number."));
+        }
+        catch(IllegalArgumentException ex){
+        dateBuiltText.setText(ex.getMessage());
+        }
     }
     /**
      * Private inner class for EventListeners, each implementing the ActionListener
@@ -221,9 +281,9 @@ public class Window extends JFrame
     }
     private class CalculateButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            setFields();
-
-    
+            setFields(); //parses all the info from the text fields and puts them in appropriate data types. (doubles/ints)
+            Thermostat thermostat = new Thermostat(roomTempDouble, lengthInt
+  
         }
     }
 }
