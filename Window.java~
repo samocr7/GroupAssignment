@@ -9,6 +9,7 @@ public class Window extends JFrame
     JTextField roomText, outsideText, desireText, furnaceText, furnaceCapText, effText, sizeText, overheatText, freqText, timeText, dateBuiltText;
     double roomTempDouble,outsideTempDouble, insideDesiredRoomTempDouble,furnaceCapDouble,furnaceEffDouble,roomSizeDouble,furnaceOverheatTempDouble,freqSecDouble;
     int lengthInt;
+    private String furnaceTypeStr;
     public Window(){
         setSize(1000,300); //
         setTitle("Monthly Sales Tax");
@@ -126,7 +127,7 @@ public class Window extends JFrame
             desireText.setText("Error! Invalid Input! Please enter a number.");
         }
 
-        String furnaceTypeStr = furnaceText.getText(); // furnace type, 'Gas' or "Electric'
+        furnaceTypeStr = furnaceText.getText(); // furnace type, 'Gas' or "Electric'
         try
         {
             if ((furnaceTypeStr.equalsIgnoreCase("Gas")) || (furnaceTypeStr.equalsIgnoreCase("Electric")))
@@ -144,6 +145,7 @@ public class Window extends JFrame
             furnaceText.setText(ex.getMessage());
             //System.out.println("Error! Invalid Input! Enter 'Gas' or 'Electric'");
         }
+        
 
         String furnaceCapStr = furnaceCapText.getText(); // capacity of the furnace, in BTUs/hr
         try
@@ -269,6 +271,24 @@ public class Window extends JFrame
         catch(IllegalArgumentException ex){
         dateBuiltText.setText(ex.getMessage());
         }
+        
+        objects();
+    }
+    public void objects(){
+        int dateBuiltInt = Integer.parseInt(dateBuiltText.getText());
+        
+        Thermostat thermostat = new Thermostat(roomTempDouble, lengthInt,furnaceOverheatTempDouble,freqSecDouble, 1);
+        Room room = new Room(roomTempDouble, roomSizeDouble);
+        Environment env = new Environment(outsideTempDouble);
+        
+        if ((furnaceTypeStr.equalsIgnoreCase("Gas")))
+        {
+            Furnace wheezing = new GasFurnace(dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
+        }
+        else
+        {
+            Furnace pikachu = new ElectricFurnace (dateBuiltInt,furnaceCapDouble, furnaceEffDouble);
+        }
     }
     /**
      * Private inner class for EventListeners, each implementing the ActionListener
@@ -282,7 +302,7 @@ public class Window extends JFrame
     private class CalculateButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             setFields(); //parses all the info from the text fields and puts them in appropriate data types. (doubles/ints)
-            Thermostat thermostat = new Thermostat(roomTempDouble, lengthInt
+            
   
         }
     }

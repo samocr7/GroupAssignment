@@ -14,17 +14,13 @@ public class Thermostat
         this.furnaceStatus=furnaceStatus;
 
     }
-
-    public void turnFurnace(){
-        if (furnaceStatus==0){
-            //turn furnace on
+    
+    public void turnFurnace(double temp)
+    {
+        if(temp < tempSetting)
             furnaceStatus=1;
-        }
-        else{
-            //turns furnace off
+            else
             furnaceStatus=0;
-        }
     }
-
 }
 
