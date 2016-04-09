@@ -4,30 +4,32 @@
  */
 public class Data
 {
-    int time;
-    double insideTemp;
-    double outsideTemp;
-    String furnaceStatus;
-    public Data(int time, double insideTemp, double outsideTemp, String furnaceStatus){
-        this.time=time;
-        this.insideTemp=insideTemp;
-        this.outsideTemp=outsideTemp;
-        this.furnaceStatus=furnaceStatus;
+    private int time;
+    private double temp;
+    private double outTemp;
+    private int furnaceStat;
+    public Data(int time, double temp, double outTemp, int furnaceStat) 
+    {
+        this.time = time;
+        this.temp = temp;
+        this.outTemp = outTemp;
+        this.furnaceStat = furnaceStat;
     }
-
-    public int getTime(){
+    
+    public int getTime()
+    {
         return time;
     }
 
     public double getInsideTemp(){
-        return insideTemp;
+        return temp;
     }
-    
+
     public double getOutsideTemp(){
-        return outsideTemp;
+        return outTemp;
     }
-    
-    public String getFurnaceStatus(){
-        return furnaceStatus;
+
+    public int getFurnaceStatus(){
+        return furnaceStat;
     }
 }

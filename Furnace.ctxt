@@ -2,5 +2,13 @@
 comment0.params=dateBuilt\ furnaceCap\ efficiency\ roomSize
 comment0.target=Furnace(int,\ double,\ double,\ double)
 comment1.params=
-comment1.target=void\ furnaceOutput()
-numComments=2
+comment1.target=int\ getOutput()
+comment2.params=
+comment2.target=int\ getStatus()
+comment3.params=
+comment3.target=java.lang.String\ getEff()
+comment4.params=
+comment4.target=int\ getYear()
+comment5.params=status
+comment5.target=void\ setStatus(int)
+numComments=6

@@ -4,4 +4,6 @@ public class Environment
     public Environment(double temp){
         this.temp=temp;
     }
+    
+    public double getTemp() { return temp; }
 }

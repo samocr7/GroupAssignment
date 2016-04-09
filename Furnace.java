@@ -12,6 +12,7 @@ public abstract class Furnace
     protected double efficiency;
     protected double roomSize;
     protected int output;
+    protected int status;
     
     public Furnace(int dateBuilt, double furnaceCap, double efficiency, double roomSize){
     this.dateBuilt=dateBuilt;
@@ -20,5 +21,14 @@ public abstract class Furnace
     this.roomSize = roomSize;
     }
     
-    public abstract void furnaceOutput();
+    public int getOutput(){ return output;}
+    public int getStatus() { return status; }
+    public String getEff() 
+    {
+        double eff = efficiency*100;
+        return ""+eff+"%";}
+    public int getYear(){ return dateBuilt;}
+        
+        
+    public void setStatus(int status) { this.status=status;}
 }

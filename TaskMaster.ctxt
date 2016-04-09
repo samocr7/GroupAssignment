@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=length\ freq\ info
+comment0.target=TaskMaster(int,\ double,\ InfoMaster)
+comment1.params=
+comment1.target=void\ simulationRun()
+numComments=2

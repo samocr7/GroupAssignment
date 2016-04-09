@@ -10,9 +10,10 @@ public class Window extends JFrame
     double roomTempDouble,outsideTempDouble, insideDesiredRoomTempDouble,furnaceCapDouble,furnaceEffDouble,roomSizeDouble,furnaceOverheatTempDouble,freqSecDouble;
     int lengthInt;
     private String furnaceTypeStr;
+    private TaskMaster simulationRun;
     public Window(){
         setSize(1000,300); //
-        setTitle("Monthly Sales Tax");
+        setTitle("Furnace Simulation");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(500,500); 
         createPanel();
@@ -21,22 +22,22 @@ public class Window extends JFrame
     }
 
     public void createPanel(){
-        panel.setLayout(new GridLayout(8,7)); //7 rows, 2 column grid
+        panel.setLayout(new GridLayout(12,2)); //7 rows, 2 column grid
 
         JButton simulate=new JButton("Simulate"); //simulate button
         JButton exit = new JButton("Exit"); //exit button
 
-        roomTemp = new JLabel("Room Temperature:",JLabel.RIGHT);  //roomTemperature label
-        outsideTemp = new JLabel("Outside Temperature:",JLabel.RIGHT);   //outsideTemperature label
-        desireTemp = new JLabel("Desired Temperature:",JLabel.RIGHT); //DesiredTemperature label
-        furnaceType = new JLabel("Type of Furnace:",JLabel.RIGHT); //furnaceType label
-        furnaceCap = new JLabel("Furnace Capacity:",JLabel.RIGHT);  //furanceCap  label
-        furnaceEff = new JLabel("Furnace Efficiency:",JLabel.RIGHT);  //furnaceEff label
-        roomSize= new JLabel("Size of the room:",JLabel.RIGHT); //roomSize label
-        overheat = new JLabel("Overheat amount:",JLabel.RIGHT); //overheat label
-        freq = new JLabel("Output intervals:",JLabel.RIGHT);    //frequency label
-        time = new JLabel("Simulation duration:",JLabel.RIGHT); //simulation time label
-        dateBuilt= new JLabel("Year the furnace was built:",JLabel.RIGHT); //datebuilt label
+        roomTemp = new JLabel("Room Temperature:",JLabel.LEFT);  //roomTemperature label
+        outsideTemp = new JLabel("Outside Temperature:",JLabel.LEFT);   //outsideTemperature label
+        desireTemp = new JLabel("Desired Temperature:",JLabel.LEFT); //DesiredTemperature label
+        furnaceType = new JLabel("Type of Furnace:",JLabel.LEFT); //furnaceType label
+        furnaceCap = new JLabel("Furnace Capacity:",JLabel.LEFT);  //furanceCap  label
+        furnaceEff = new JLabel("Furnace Efficiency:",JLabel.LEFT);  //furnaceEff label
+        roomSize= new JLabel("Size of the room:",JLabel.LEFT); //roomSize label
+        overheat = new JLabel("Overheat amount:",JLabel.LEFT); //overheat label
+        freq = new JLabel("Output intervals:",JLabel.LEFT);    //frequency label
+        time = new JLabel("Simulation duration:",JLabel.LEFT); //simulation time label
+        dateBuilt= new JLabel("Year the furnace was built:",JLabel.LEFT); //datebuilt label
 
         roomText= new JTextField("22.00",8);  //roomTemperature text field
         outsideText = new JTextField("10.00",8);   //outsideTemperature text field
@@ -271,24 +272,25 @@ public class Window extends JFrame
         catch(IllegalArgumentException ex){
         dateBuiltText.setText(ex.getMessage());
         }
-        
-        objects();
     }
-    public void objects(){
+    public void simulationObjects(){
         int dateBuiltInt = Integer.parseInt(dateBuiltText.getText());
-        
-        Thermostat thermostat = new Thermostat(roomTempDouble, lengthInt,furnaceOverheatTempDouble,freqSecDouble, 1);
+      
         Room room = new Room(roomTempDouble, roomSizeDouble);
         Environment env = new Environment(outsideTempDouble);
-        
+        Furnace heaterF = null;
+         
         if ((furnaceTypeStr.equalsIgnoreCase("Gas")))
         {
-            Furnace wheezing = new GasFurnace(dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
+            heaterF = new GasFurnace(dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
         }
         else
         {
-            Furnace pikachu = new ElectricFurnace (dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
+            heaterF = new ElectricFurnace (dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
         }
+        Thermostat thermostat = new Thermostat(insideDesiredRoomTempDouble, lengthInt,furnaceOverheatTempDouble,freqSecDouble, heaterF, room, env);
+        InfoMaster update = new InfoMaster(lengthInt, freqSecDouble, env, heaterF, room, thermostat);
+        simulationRun = new TaskMaster(lengthInt, freqSecDouble, update);
     }
     /**
      * Private inner class for EventListeners, each implementing the ActionListener
@@ -302,8 +304,8 @@ public class Window extends JFrame
     private class CalculateButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             setFields(); //parses all the info from the text fields and puts them in appropriate data types. (doubles/ints)
-            
-  
+            simulationObjects(); // creates all the objects to run the simulation
+            simulationRun.simulationRun();
         }
     }
 }

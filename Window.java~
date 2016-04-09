@@ -276,19 +276,21 @@ public class Window extends JFrame
     }
     public void objects(){
         int dateBuiltInt = Integer.parseInt(dateBuiltText.getText());
-        
-        Thermostat thermostat = new Thermostat(roomTempDouble, lengthInt,furnaceOverheatTempDouble,freqSecDouble, 1);
+      
         Room room = new Room(roomTempDouble, roomSizeDouble);
         Environment env = new Environment(outsideTempDouble);
-        
+        Furnace heaterF = null;
+         
         if ((furnaceTypeStr.equalsIgnoreCase("Gas")))
         {
-            Furnace wheezing = new GasFurnace(dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
+            heaterF = new GasFurnace(dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
         }
         else
         {
-            Furnace pikachu = new ElectricFurnace (dateBuiltInt,furnaceCapDouble, furnaceEffDouble);
+            heaterF = new ElectricFurnace (dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
         }
+        
+        Thermostat thermostat = new Thermostat(insideDesiredRoomTempDouble, lengthInt,furnaceOverheatTempDouble,freqSecDouble, heaterF, room);
     }
     /**
      * Private inner class for EventListeners, each implementing the ActionListener

@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=time\ insideTemp\ outsideTemp\ furnaceStatus
-comment0.target=Data(int,\ double,\ double,\ java.lang.String)
+comment0.params=time\ temp\ outTemp\ furnaceStat
+comment0.target=Data(int,\ double,\ double,\ int)
 comment1.params=
 comment1.target=int\ getTime()
 comment2.params=
@@ -8,5 +8,5 @@ comment2.target=double\ getInsideTemp()
 comment3.params=
 comment3.target=double\ getOutsideTemp()
 comment4.params=
-comment4.target=java.lang.String\ getFurnaceStatus()
+comment4.target=int\ getFurnaceStatus()
 numComments=5

@@ -20,8 +20,4 @@ public abstract class Furnace
     this.roomSize = roomSize;
     }
     
-    public abstract void furnaceOutput();
-    
-    
-    public abstract int getOutput(){ return output; }
 }

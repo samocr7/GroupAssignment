@@ -4,23 +4,29 @@ public class Thermostat
     private int length;
     private double overheatSetting;
     private double freq;
-    private int furnaceStatus;
+    private Furnace furnace;
+    private Room room;
+    private Environment env;
 
-    public Thermostat(double tempSetting, int length, double overheatSetting, double freq, int furnaceStatus){
+    public Thermostat(double tempSetting, int length, double overheatSetting, double freq, Furnace furnace, Room room, Environment env){
         this.tempSetting=tempSetting;
         this.length=length;
         this.overheatSetting=overheatSetting;
         this.freq=freq;
-        this.furnaceStatus=furnaceStatus;
-
+        this.furnace=furnace;
+        this.room = room;
+        this.env = env;
     }
     
-    public void turnFurnace(double temp)
+    public void turnFurnace()
     {
-        if(temp < tempSetting)
-            furnaceStatus=1;
-            else
-            furnaceStatus=0;
+        double Qin = (furnace.getOutput()) * freq;
+        double BCL = room.getSize();
+        double Qloss = BLC * room.getSize() * (room.getTemp() - env.getTemp()) * freq;
+        //if(roomTemp < tempSetting)
+        //    furnaceStatus=1;
+        //    else
+        //    furnaceStatus=0;
     }
 }
 

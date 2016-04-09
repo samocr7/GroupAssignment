@@ -2,12 +2,13 @@ public class GasFurnace extends Furnace
 {
     //private double efficiency;
     //private double furnaceCap;
+    private int output=furnaceOutput();
     public GasFurnace(int dateBuilt, double furnaceCap, double efficiency, double roomSize){
         super(dateBuilt,furnaceCap, efficiency, roomSize);
         
     }
     
-    public void furnaceOutput()
+    public int furnaceOutput()
     {
         if (dateBuilt < 1980){
             if (roomSize < 1300)
@@ -34,6 +35,7 @@ public class GasFurnace extends Furnace
                 else if ((roomSize >= 3500) && (roomSize < 4500))
                 output = 70000;
             }
+            return output;
     }
     
     public int getOutput() { return output; }

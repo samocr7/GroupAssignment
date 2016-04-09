@@ -1,6 +1,10 @@
 #BlueJ class context
-comment0.params=tempSetting\ length\ overheatSetting\ freq\ furnaceStatus
-comment0.target=Thermostat(double,\ int,\ double,\ double,\ int)
-comment1.params=temp
-comment1.target=void\ turnFurnace(double)
-numComments=2
+comment0.params=tempSetting\ length\ overheatSetting\ freq\ furnace\ room\ env
+comment0.target=Thermostat(double,\ int,\ double,\ double,\ Furnace,\ Room,\ Environment)
+comment1.params=
+comment1.target=void\ turnFurnace()
+comment2.params=
+comment2.target=double\ getTempSetting()
+comment3.params=
+comment3.target=double\ getOverheatSetting()
+numComments=4

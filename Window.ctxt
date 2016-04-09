@@ -6,5 +6,5 @@ comment1.target=void\ createPanel()
 comment2.params=
 comment2.target=void\ setFields()
 comment3.params=
-comment3.target=void\ objects()
+comment3.target=void\ simulationObjects()
 numComments=4
