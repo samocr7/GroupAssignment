@@ -3,4 +3,5 @@ comment0.params=length\ freq\ info
 comment0.target=TaskMaster(int,\ double,\ InfoMaster)
 comment1.params=
 comment1.target=void\ simulationRun()
+comment1.text=\r\n\ simulationRun\ Description\:\ Creates\ timer,\ table,\ does\ maths,\ calls\ timer\ to\ display\ information\r\n
 numComments=2

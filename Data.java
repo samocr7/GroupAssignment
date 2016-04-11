@@ -1,16 +1,16 @@
 /**
- * Takes all the required information into a Data object, which is then passed into the Information class
+ * Data Description: Takes all the required information into a Data object, which is then passed into the Information class
  * to store into the array
  */
+
 public class Data
 {
-    private int time;
-    private double temp;
-    private double outTemp;
-    private int furnaceStat;
+    private int time, furnaceStat; // initialize variables
+    private double temp, outTemp;
+
     public Data(int time, double temp, double outTemp, int furnaceStat) 
     {
-        this.time = time;
+        this.time = time; // set variables accordingly based on information passed in
         this.temp = temp;
         this.outTemp = outTemp;
         this.furnaceStat = furnaceStat;

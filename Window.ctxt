@@ -1,10 +1,14 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Window()
+comment0.text=\r\n\ Window\ Description\:\ Constructor,\ sets\ default\ settings\ that\ allow\ us\ to\ bring\ up\ the\ GUI.\r\n
 comment1.params=
 comment1.target=void\ createPanel()
+comment1.text=\r\n\ createPanel\ Description\:\ Create\ the\ panel\ (text\ fields,\ buttons,\ etc)\ that\ will\ be\ added\ to\ the\ window.\r\n
 comment2.params=
 comment2.target=void\ setFields()
+comment2.text=\r\n\ setFields\ Description\:\ Checks\ given\ inputs\ from\ text\ boxes\ for\ exceptions\ while\ converting\ inputs\ into\ the\ correct\ format\ for\ passing\ into\ methods.\r\n\ If\ exceptions\ occur\ the\ text\ fields\ are\ set\ to\ an\ error\ that\ the\ user\ can\ see\ and\ change\ from\ the\ window\ they\ are\ looking\ at.\r\n
 comment3.params=
 comment3.target=void\ simulationObjects()
+comment3.text=\r\n\ simulationObjects\ Description\:\ Creates/instantiates\ Room,\ Environment,\ Furnace,\ Thermostat,\ InfoMaster,\ TaskMaster\r\n
 numComments=4

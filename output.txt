@@ -1,0 +1,25 @@
+Gas Furnace capacity = 0	Efficiency = 90.0%	Pilot on = trueheating = false
+Room: Year Built:2005	Temperature = 10.0	Area (Sq ft) = 2000.0	SHC = 4.0	BLC = 1.0
+Environment:   Temperature:10.0
+Thermostat:    Setting = 22.0	Overheat = 2.0
+Starting simulation:    Display frequency(seconds) = 5	Runtime(seconds): 7200
+Gas Furnace capacity = 0	Efficiency = 90.0%	Pilot on = trueheating = false
+Room: Year Built:2005	Temperature = 22.0	Area (Sq ft) = 2000.0	SHC = 4.0	BLC = 1.0
+Environment:   Temperature:10.0
+Thermostat:    Setting = 22.0	Overheat = 2.0
+Starting simulation:    Display frequency(seconds) = 5	Runtime(seconds): 100
+Gas Furnace capacity = 0	Efficiency = 90.0%	Pilot on = trueheating = false
+Room: Year Built:2005	Temperature = 10.0	Area (Sq ft) = 2000.0	SHC = 4.0	BLC = 1.0
+Environment:   Temperature:10.0
+Thermostat:    Setting = 22.0	Overheat = 2.0
+Starting simulation:    Display frequency(seconds) = 5	Runtime(seconds): 7200
+Gas Furnace capacity = 50000	Efficiency = 90.0%	Pilot on = trueheating = false
+Room: Year Built:2005	Temperature = 18.333333333333336	Area (Sq ft) = 2000.0	SHC = 4.0	BLC = 1.0
+Environment:   Temperature:10.0
+Thermostat:    Setting = 22.0	Overheat = 2.0
+Starting simulation:    Display frequency(seconds) = 5	Runtime(seconds): 7200
+Gas Furnace capacity = 50000	Efficiency = 90.0%	Pilot on = trueheating = false
+Room: Year Built:2005	Temperature = 18.333333333333336	Area (Sq ft) = 2000.0	SHC = 4.0	BLC = 1.0
+Environment:   Temperature:10.0
+Thermostat:    Setting = 22.0	Overheat = 2.0
+Starting simulation:    Display frequency(seconds) = 5	Runtime(seconds): 7200

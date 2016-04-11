@@ -3,6 +3,7 @@ comment0.params=dateBuilt\ furnaceCap\ efficiency\ roomSize
 comment0.target=GasFurnace(int,\ double,\ double,\ double)
 comment1.params=
 comment1.target=int\ furnaceOutput()
+comment1.text=\r\n\ furnaceOutput\ Description\:\ Returns\ the\ output\ of\ the\ furnace.\ Based\ on\ efficiency\ and\ the\ size\ of\ the\ room\ being\ heated.\r\n
 comment2.params=
 comment2.target=int\ getOutput()
 numComments=3

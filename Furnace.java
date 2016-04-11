@@ -1,34 +1,58 @@
-
 /**
- * Abstract class Furnace - write a description of the class here
- * 
- * @author (your name here)
- * @version (version number or date here)
+ * Furnace Description: Abstract, ElectricFurnace and GasFurnace extend this class.
  */
+
 public abstract class Furnace
 {
-    protected int dateBuilt;
-    protected double furnaceCap;
-    protected double efficiency;
-    protected double roomSize;
-    protected int output;
-    protected int status;
-    
-    public Furnace(int dateBuilt, double furnaceCap, double efficiency, double roomSize){
-    this.dateBuilt=dateBuilt;
-    this.furnaceCap=furnaceCap;
-    this.efficiency=efficiency;
-    this.roomSize = roomSize;
+    protected int dateBuilt, output, status;
+    protected double furnaceCap, efficiency, roomSize;
+
+    public Furnace(int dateBuilt, double furnaceCap, double efficiency, double roomSize)
+    {
+        this.dateBuilt=dateBuilt;
+        this.furnaceCap=furnaceCap;
+        this.efficiency=efficiency;
+        this.roomSize = roomSize;
     }
-    
-    public int getOutput(){ return output;}
-    public int getStatus() { return status; }
+
+    /**
+     * getOutput Description: Returns output amount of furnace
+     */
+    public int getOutput()
+    { 
+        return output;
+    }
+
+    /**
+     * getStatus Description: Returns the status of the furnace (on/off)
+     */
+    public int getStatus()
+    {
+        return status;
+    }
+
+    /**
+     * getEff Description: Returns how efficient the furnace is
+     */
     public String getEff() 
     {
         double eff = efficiency*100;
-        return ""+eff+"%";}
-    public int getYear(){ return dateBuilt;}
-        
-        
-    public void setStatus(int status) { this.status=status;}
+        return ""+eff+"%";
+    }
+
+    /**
+     * getYear Description: Returns the year the furnace was built
+     */
+    public int getYear()
+    {
+        return dateBuilt;
+    }
+
+    /**
+     * setStatus Description: Sets the status of the furnace (on/off)
+     */
+    public void setStatus(int status) 
+    {
+        this.status=status;
+    }
 }
