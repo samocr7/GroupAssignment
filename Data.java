@@ -1,5 +1,5 @@
 /**
- * Data Description: Takes all the required information into a Data object, which is then passed into the Information class
+ * Data Description: Takes all the required information into a Data object, which is then passed into the InfoMaster class
  * to store into the array
  */
 

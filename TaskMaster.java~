@@ -47,6 +47,6 @@ public class TaskMaster
         
         TimerTest time = new TimerTest(); // actually create the timer and pass in the information
         time.timerStart(arrayInfo, delay, printTimes);
-    } 
+    }
 }
 

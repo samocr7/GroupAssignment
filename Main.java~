@@ -1,13 +1,16 @@
+/**
+ * Main Description: This instantiates the Window class.
+ * 
+ * @author (Josh Blair | MRU ID: 201402698 | E: jblai698@mtroyal.ca) 
+ * @author (Sam Osman | MRU ID: ________ | E: sosma464@mtroyal.ca) 
+ * @author (Jorge Abarca | MRU ID: ________ | E: ______________)
+ * @author (Brian ____ | MRU ID: ________ | E: ______________)
+ */
+
 public class Main
 {
     public static void main(String args[])
     {
-        //test
-        Data data = new Data(10, 22.00, 10.00,"off");
-        Data data2 = new Data(300, 22.22, 10.00,"on");
-        Information info = new Information();
-        info.addData(data);
-        info.addData(data2);
-        info.printInfo();
+        Window window = new Window(); // instantiate Window
     }
 }

@@ -37,9 +37,8 @@ public class TimerTest
         public void actionPerformed(ActionEvent e)
         {
             DecimalFormat twoDec = new DecimalFormat("#.##"); // convert to appropriate format
-            String furnaceStat = null;
             try
-            {
+            {String furnaceStat = null;
                 if(arrayInfo.get(index2-1).getFurnaceStatus()==1){
                     furnaceStat = "On";
                     index2++;

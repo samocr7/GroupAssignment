@@ -4,8 +4,9 @@
 
 public class Thermostat
 {
-    private double tempSetting, overheatSetting, freq, Qin;
-    private int length, BLC = 1, SHC = 4;
+    private double tempSetting, overheatSetting, freq;
+    private int length; 
+    private final int BLC = 1, SHC = 4;
     private Furnace furnace;
     private Room room;
     private Environment env;
@@ -20,26 +21,56 @@ public class Thermostat
         this.room = room;
         this.env = env;
     }
+    
+    /**
+     * helper method for determining if the room requires heating
+     */
+    private boolean roomIsTooCold() {
+        return room.getTemp( )< tempSetting;
+    }
+
+    /**
+     * helper method for determining if the room doesn't need heating
+     */
+    private boolean roomIsTooHot() {
+        return room.getTemp() > (tempSetting+overheatSetting);
+    }
 
     /**
      * turnFurnace Description: turn the furnace on or off depending on current state of room sensed by thermostat (what the variables are holding)
      */
     public void turnFurnace()
     {
-        if(room.getTemp() < tempSetting+overheatSetting) // turn the furnace on
+        double Qin=0;
+        int overheat = furnace.getStatus();
+        switch(overheat)
         {
-            furnace.setStatus(1);
-            Qin = (furnace.getOutput()) * (length/3600);
+            case 0:if(roomIsTooCold()){
+                furnace.setStatus(1); //turns furnace on
+                Qin = furnace.getOutput()*((freq*60)/3600); //math for furnace input when turned on
+            }
+            else if((room.getTemp()>=tempSetting)&&(room.getTemp()<(tempSetting+overheatSetting))){
+                Qin = 0;
+                furnace.setStatus(0);
+            }
+            break;
+            case 1: if(roomIsTooHot()){
+                furnace.setStatus(0);//turns furnace off
+                Qin=0; //furnace input is 0 when it is off
+            }
+            else if((room.getTemp()>=tempSetting)&&(room.getTemp()<(tempSetting+overheatSetting))){ //when the temperature is greater than the desired temperature, and proceeds to overheat
+                Qin = furnace.getOutput()*((freq*60)/3600); //math for furnace input when turned on
+            }
+            else if(roomIsTooCold()){
+                furnace.setStatus(1);//turns furnace on
+                Qin = furnace.getOutput()*((freq*60)/3600);//math for furnace input when turned on
+            }
+            break;
         }
-        else // keep the furnace off
-        {
-            furnace.setStatus(0);
-            Qin=0;
-        }
-        
-        double Qloss = BLC * room.getSize() * (room.getTemp() - env.getTemp()) * (length/3600); // maths
-        double roomTempCheck = ((Qin - Qloss) / (SHC * room.getSize()) ) + room.getTemp();
-        room.setTemp(roomTempCheck);
+
+        double Qloss = BLC * room.getSize() * (room.getTemp() - env.getTemp()) * ((freq*60)/3600);//math for the heating that is lost 
+        double roomTempCheck = ((Qin - Qloss) / (SHC * room.getSize()) ) + room.getTemp(); //math for the new temperature of the room
+        room.setTemp(roomTempCheck); //sets the temperature of the room to the calculated temperature
     }
 
     /**

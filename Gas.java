@@ -2,13 +2,13 @@
  * GasFurnace Description: Extends Furnace, "is-a" type of Furnace.
  */
 
-public class GasFurnace extends Furnace
+public class Gas extends Furnace
 {
     //private double efficiency;
     //private double furnaceCap;
     private int output = furnaceOutput();
 
-    public GasFurnace(int dateBuilt, double furnaceCap, double efficiency, double roomSize){
+    public Gas(int dateBuilt, double furnaceCap, double efficiency, double roomSize){
         super(dateBuilt,furnaceCap, efficiency, roomSize);
     }
 

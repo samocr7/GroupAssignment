@@ -108,7 +108,7 @@ public class InfoMaster
     /**
      * getArray Description: Returns array
      */
-    public ArrayList<Data> getArray()
+    public ArrayList getArray()
     {
         return info;
     }

@@ -114,9 +114,10 @@ public class Window extends JFrame
      * setFields Description: Checks given inputs from text boxes for exceptions while converting inputs into the correct format for passing into methods.
      * If exceptions occur the text fields are set to an error that the user can see and change from the window they are looking at.
      */
-    public void setFields()
+    public boolean setFields()
     {
         String roomTempStr = roomText.getText(); // this is the current inside temperature, get it from the text box
+        boolean validate=true; //sets to false when an exception is caught
         try
         {
             roomTempDouble = Double.parseDouble(roomTempStr); // try and turn it into a double, catch an exception if it occurs.
@@ -124,6 +125,7 @@ public class Window extends JFrame
         catch(NumberFormatException ex) // catch exception
         {
             roomText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
 
         String outsideTempStr = outsideText.getText(); // this is the current outside temperature, get it from the text box
@@ -134,6 +136,7 @@ public class Window extends JFrame
         catch(NumberFormatException ex) // catch exception
         {
             outsideText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
 
         String insideDesiredRoomTempStr = desireText.getText(); // this is the desired room temperature, get it from the text box
@@ -144,6 +147,7 @@ public class Window extends JFrame
         catch(NumberFormatException ex) // catch exception
         {
             desireText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
 
         furnaceTypeStr = furnaceText.getText(); // furnace type, 'Gas' or "Electric', get it from the text box
@@ -152,11 +156,13 @@ public class Window extends JFrame
             if (!((furnaceTypeStr.equalsIgnoreCase("Gas")) || (furnaceTypeStr.equalsIgnoreCase("Electric"))))
             {
                 throw new IllegalArgumentException("Error! Invalid Input! Enter 'Gas' or 'Electric'"); // throw the error if the input is invalid
+
             }
         }
         catch(IllegalArgumentException ex) // catch the exception that is thrown if user enters invalid input
         {
             furnaceText.setText(ex.getMessage());
+            validate=false;
         }
 
         String furnaceCapStr = furnaceCapText.getText(); // capacity of the furnace, in BTUs/hr, get it from the text box
@@ -166,15 +172,18 @@ public class Window extends JFrame
             if(furnaceCapDouble<=0.0) // throw the error if furnace capacity is less than or equal to 0
             {
                 throw new IllegalArgumentException("Error! Invalid Input! Please enter a number greater than 0.");
+
             }
         }
         catch(NumberFormatException ex) // catch exception
         {
             furnaceCapText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         } 
         catch(IllegalArgumentException ex) // catch exception
         {
             furnaceCapText.setText(ex.getMessage());
+            validate=false;
         }
 
         String furnaceEffStr = effText.getText(); // efficiency of the furnace 0.0 - 1.0, get it from the text box
@@ -184,15 +193,18 @@ public class Window extends JFrame
             if ((!(furnaceEffDouble >= 0.0) && (furnaceEffDouble <= 1.0))) // throw exception because the range entered isnt between/equal to 0.0 and 1.0
             {
                 throw new IllegalArgumentException("Error! Invalid Input! Please enter a number between 0.0 and 1.0");
+
             }
         }
         catch(NumberFormatException ex) // catch exception
         {
             effText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
         catch (IllegalArgumentException ex) // catch exception
         {
             effText.setText(ex.getMessage());
+            validate=false;
         }
 
         String roomSizeStr = sizeText.getText(); // size of the room to be heated, get it from the text box
@@ -207,10 +219,12 @@ public class Window extends JFrame
         catch(NumberFormatException ex) // catch exception
         {
             sizeText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
         catch(IllegalArgumentException ex) // catch exception
         {
             sizeText.setText(ex.getMessage());
+            validate=false;
         }
 
         String furnaceOverheatTempStr = overheatText.getText(); // amount to which the furnace should overheat, get it from the text box
@@ -225,10 +239,12 @@ public class Window extends JFrame
         catch(NumberFormatException ex) // catch exception
         {
             overheatText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
         catch(IllegalArgumentException ex) // catch exception
         {
             overheatText.setText(ex.getMessage());
+            validate=false;
         }
 
         String freqSecStr=freqText.getText();
@@ -244,10 +260,12 @@ public class Window extends JFrame
         {
             //System.out.println(ex.getMessage());
             freqText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
         catch(IllegalArgumentException ex) // catch exception
         {
             freqText.setText(ex.getMessage());
+            validate=false;
         }
 
         String LengthStr=timeText.getText(); // get the length (how long to run), get it from the text box
@@ -262,10 +280,12 @@ public class Window extends JFrame
         catch(NumberFormatException ex) // catch exception
         {
             timeText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
         catch(IllegalArgumentException ex) // catch exception
         {
             timeText.setText(ex.getMessage());
+            validate=false;
         }
 
         String dateBuiltStr=dateBuiltText.getText(); // date the furnace was built, get it from the text box
@@ -279,11 +299,14 @@ public class Window extends JFrame
         catch(NumberFormatException ex) // catch exception
         {
             dateBuiltText.setText("Error! Invalid Input! Please enter a number.");
+            validate=false;
         }
         catch(IllegalArgumentException ex) // catch exception
         {
             dateBuiltText.setText(ex.getMessage());
+            validate=false;
         }
+        return validate;
     }
 
     /**
@@ -297,17 +320,17 @@ public class Window extends JFrame
 
         if ((furnaceTypeStr.equalsIgnoreCase("Gas")))
         {
-            heaterF = new GasFurnace(dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
+            heaterF = new Gas(dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
         }
         else
         {
-            heaterF = new ElectricFurnace (dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
+            heaterF = new Electric (dateBuiltInt,furnaceCapDouble, furnaceEffDouble, roomSizeDouble);
         }
         Thermostat thermostat = new Thermostat(insideDesiredRoomTempDouble, lengthInt,furnaceOverheatTempDouble,freqSecDouble, heaterF, room, env);
         InfoMaster update = new InfoMaster(lengthInt, freqSecDouble, env, heaterF, room, thermostat);
         simulationRun = new TaskMaster(lengthInt, freqSecDouble, update);
     }
-    
+
     /**
      * ExitButtonListener Description: Closes the program if this method is called (the exit button is clicked)
      */
@@ -318,7 +341,7 @@ public class Window extends JFrame
             System.exit(0); //exists the program
         }
     }
-    
+
     /**
      * CalculateButtonListener Description: Runs program (calculates) if method is called (the calculate button is pressed)
      */
@@ -326,9 +349,10 @@ public class Window extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            setFields(); //parses all the info from the text fields and puts them in appropriate data types. (doubles/ints)
-            simulationObjects(); // creates all the objects to run the simulation
-            simulationRun.simulationRun();
+            if(setFields()==true){
+                simulationObjects(); // creates all the objects to run the simulation
+                simulationRun.simulationRun();
+            }
         }
     }
 }

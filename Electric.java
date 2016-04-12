@@ -1,15 +1,16 @@
 /**
- * GasFurnace Description: Extends Furnace, "is-a" type of Furnace.
+ * ElectricFurnace Description: Extends Furnace, "is-a" type of Furnace.
  */
 
-public class GasFurnace extends Furnace
+public class Electric extends Furnace
 {
     //private double efficiency;
     //private double furnaceCap;
     private int output = furnaceOutput();
 
-    public GasFurnace(int dateBuilt, double furnaceCap, double efficiency, double roomSize){
-        super(dateBuilt,furnaceCap, efficiency, roomSize);
+    public Electric(int dateBuilt, double furnaceCap, double efficiency, double roomSize)
+    {
+        super(dateBuilt,furnaceCap, efficiency, roomSize); // pass the info to the boss
     }
 
     /**
@@ -49,7 +50,7 @@ public class GasFurnace extends Furnace
     
     public int getOutput()
     {
-    return output;
+        return output;
     }
-     
+    
 }

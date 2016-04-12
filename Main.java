@@ -3,8 +3,8 @@
  * 
  * @author (Josh Blair | MRU ID: 201402698 | E: jblai698@mtroyal.ca) 
  * @author (Sam Osman | MRU ID: 201612464 | E: sosma464@mtroyal.ca) 
- * @author (Jorge Abarca | MRU ID: ________ | E: ______________)
- * @author (Brian ____ | MRU ID: ________ | E: ______________)
+ * @author (Jorge Abarca | MRU ID: 201609637 | E: jabar637@mtroyal.ca)
+ * @author (Brian Lee | MRU ID: 201613752| E: blee752@mtroyal.ca)
  */
 
 public class Main
